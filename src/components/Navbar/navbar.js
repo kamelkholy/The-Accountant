@@ -1,32 +1,42 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 class Navbar extends Component {
   state = {};
+  routeHandler(page) {
+    switch (page) {
+      case "clients":
+        break;
+
+      default:
+        break;
+    }
+  }
   render() {
     return (
       <nav class="navbar navbar-light navbar-expand-sm bg-light fixed-top">
-        <a class="navbar-brand" href="#">
+        <Link class="navbar-brand" to="/">
           My Manager
-        </a>
+        </Link>
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <Link class="nav-link" to="/">
               Dashboard
-            </a>
+            </Link>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <Link class="nav-link" to="/clients">
               Clients
-            </a>
+            </Link>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <Link class="nav-link" to="/products">
               Products
-            </a>
+            </Link>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <Link class="nav-link" to="/products">
               Invoices
-            </a>
+            </Link>
           </li>
         </ul>
       </nav>
