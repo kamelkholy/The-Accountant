@@ -34,7 +34,7 @@ class Navbar extends Component {
             </Link>
           </li>
           <li class="nav-item">
-            <Link class="nav-link" to="/products">
+            <Link class="nav-link" to="/invoices">
               Invoices
             </Link>
           </li>

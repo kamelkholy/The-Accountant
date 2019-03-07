@@ -17,26 +17,30 @@ class Invoice extends Component {
 
   render() {
     return (
-      <React.Fragment>
-        <div className="row m-1">
-          <div className="col-5">
-            Invoice to
-            <select className="m-2" id="clientSelect">
+      <div>
+        <form className="m-2" style={{ maxWidth: 300 + "px" }}>
+          <div class="form-group">
+            <label for="clientSelect">Invoice to</label>
+            <select className="form-control" id="clientSelect">
               {this.state.clientNames.map(client => (
                 <option key={client}>{client}</option>
               ))}
             </select>
-            Date
+          </div>
+          <div class="form-group">
+            <label for="date">Date</label>
+            <br />
             <DatePicker
-              className="m-2"
+              id="date"
+              className="form-control"
               selected={this.state.date}
               onChange={this.handleDateChange}
             />
           </div>
-          <div className="col">
-            Add Item
+          <div class="form-group">
+            <label for="itemSelect">Select Item</label>
             <select
-              className="m-2"
+              className="form-control"
               id="itemSelect"
               onMouseUpCapture={() => this.handleItemSelect()}
             >
@@ -44,44 +48,54 @@ class Invoice extends Component {
                 <option key={item}>{item}</option>
               ))}
             </select>
+          </div>
+          <div class="form-group">
+            <label for="priceInput">Price</label>
             <input
+              className="form-control"
               type="number"
               name="price"
               placeholder="price"
               id="priceInput"
             />
+          </div>
+          <div class="form-group">
+            <label for="quantityInput">Quantity</label>
             <input
-              className="m-2"
+              className="form-control"
               type="number"
               name="quantity"
               placeholder="quantity"
               id="quantityInput"
             />
+          </div>
+
+          <button
+            className="btn btn-primary"
+            onClick={() => this.handleAddItemButton()}
+          >
+            Add
+          </button>
+        </form>
+        <React.Fragment>
+          <div className="m-2">
+            <ItemTable
+              onItemDelete={this.handleItemDelete}
+              items={this.state.items}
+            />
             <button
-              className="btn btn-primary"
-              onClick={() => this.handleAddItemButton()}
+              onClick={this.handleSaveInvoiceClick}
+              className={
+                this.state.items.length === 0 || this.state.date === undefined
+                  ? "btn btn-danger"
+                  : "btn btn-primary"
+              }
             >
-              Add
+              Save Invoice
             </button>
           </div>
-        </div>
-        <div className="m-2">
-          <ItemTable
-            onItemDelete={this.handleItemDelete}
-            items={this.state.items}
-          />
-          <button
-            onClick={this.handleSaveInvoiceClick}
-            className={
-              this.state.items.length === 0 || this.state.date === undefined
-                ? "btn btn-danger"
-                : "btn btn-primary"
-            }
-          >
-            Save Invoice
-          </button>
-        </div>
-      </React.Fragment>
+        </React.Fragment>
+      </div>
     );
   }
 

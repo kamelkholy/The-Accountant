@@ -24,12 +24,16 @@ const ItemTable = props => {
             <td>{item.quantity}</td>
             <td>{item.subtotal}</td>
             <td>
-              <button
-                onClick={() => props.onItemDelete(item)}
-                className="btn btn-danger btn-sm"
-              >
-                Delete
-              </button>
+              {props.onItemDelete ? (
+                <button
+                  onClick={() => props.onItemDelete(item)}
+                  className="btn btn-danger btn-sm"
+                >
+                  Delete
+                </button>
+              ) : (
+                ""
+              )}
             </td>
           </tr>
         ))}
