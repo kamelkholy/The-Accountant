@@ -2,20 +2,45 @@ import React, { Component } from "react";
 
 import { Router, Route, Switch, Redirect, Link } from "react-router-dom";
 import createHistory from "history/createBrowserHistory";
+import { browserHistory } from 'react-router';
+import { withRouter } from 'react-router-dom';
+import database from './firebase/firebase.js'
+
+
+const history = createHistory();
+
 
 class ClientList extends React.Component {
-  state = {
-    headers: [
-      { name: "#", sort: 0 },
-      { name: "Client Name", sort: 0 },
-      { name: "Access" }
-    ],
-    data: [
-      { id: "1", clientName: "ahmed" },
-      { id: "2", clientName: "moamed" },
-      { id: "3", clientName: "omar" }
-    ]
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      headers: [
+        { name: "#", sort: 0 },
+        { name: "Client Name", sort: 0 },
+        { name: "Access" }
+      ],
+      data: [],
+      temp: false
+    };
+
+    database.ref('data').once('value').then((snapshot) => {
+      const data = [];
+      let i = 0;
+      snapshot.forEach((snapshotChild) => {
+        data.push({
+          id: i,
+          ...snapshotChild.val()
+        })
+        i++;
+      })
+      this.setState({ data: data })
+      console.log(data)
+    })
+  }
+
+
+
+
   renderSort(sort) {
     switch (sort) {
       case 0:
@@ -40,6 +65,10 @@ class ClientList extends React.Component {
     }
   }
 
+  AddHandler() {
+    this.props.history.push('/clients/add');
+  }
+
   render() {
     const headerElements = this.state.headers.map((header, index) => (
       <td
@@ -49,9 +78,10 @@ class ClientList extends React.Component {
         {header.name} {this.renderSort(header.sort)}
       </td>
     ));
-    const dataElements = this.state.data.map(record => {
+    const dataElements = this.state.data.map((record) => {
       let row = [];
       for (let key in record) {
+        console.log(record[key]);
         row.push(<td>{record[key]}</td>);
       }
       return (
@@ -74,6 +104,7 @@ class ClientList extends React.Component {
         <button
           style={{ marginBottom: 10 }}
           class="btn btn-primary"
+          onClick={this.AddHandler.bind(this)}
         >
           Add New
         </button>
