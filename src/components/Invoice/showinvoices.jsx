@@ -59,14 +59,8 @@ class InvoiceViewer extends Component {
 
   render() {
     return (
-      <div>
-        <Link
-          style={{ marginBottom: 10, marginLeft: 10 }}
-          class="btn btn-light"
-          to="invoices/add"
-        >
-          Add New
-        </Link>
+      <div className="container">
+
         <div class="row" style={{ width: "100%", marginBottom: "10px" }}>
           <div class="col-sm-4">
             <button
@@ -101,7 +95,7 @@ class InvoiceViewer extends Component {
           <div>
             <div
               className="row"
-              style={{ width: "100%", backgroundColor: "#f8f9fa" }}
+              style={{ width: "50%", textAlign: "center", margin: "auto"}}
             >
               <div className="col-sm-6">
                 <strong>Date:</strong>{" "}
@@ -122,6 +116,13 @@ class InvoiceViewer extends Component {
               </div>
             </div>
 
+            <Link
+              style={{ marginBottom: "0.5rem"}}
+              class="btn btn-primary"
+              to="invoices/add"
+            >
+              Add New
+            </Link>
             <ItemTable items={this.state.currentInvoice.items} />
           </div>
         ) : null}

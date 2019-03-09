@@ -7,6 +7,7 @@ import Products from "../components/Products/Table/table";
 import Navbar from "../components/Navbar/navbar";
 import Invoices from "../components/Invoice/showinvoices";
 import AddInvoice from "../components/Invoice/addInvoice";
+import Dashboard from "../components/Dashboard";
 export const history = createHistory();
 const AppRoute = () => (
   <Router history={history}>
@@ -14,6 +15,7 @@ const AppRoute = () => (
       <Navbar />
       <div style={{ "margin-top": 80 + "px" }}>
         <Switch>
+          <Route path="/dashboard" component={Dashboard} exact={true} />
           <Route path="/products" component={Products} exact={true} />
           <Route path="/products/add" component={Products} exact={true} />
           <Route path="/clients" component={Clients} exact={true} />

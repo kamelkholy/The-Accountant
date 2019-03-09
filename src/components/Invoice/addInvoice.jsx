@@ -17,27 +17,29 @@ class Invoice extends Component {
 
   render() {
     return (
-      <div>
-        <form className="m-2" style={{ maxWidth: 300 + "px" }}>
-          <div class="form-group">
-            <label for="clientSelect">Invoice to</label>
-            <select className="form-control" id="clientSelect">
-              {this.state.clientNames.map(client => (
-                <option key={client}>{client}</option>
-              ))}
-            </select>
+      <div className="container">
+        <form style={{ width: "100%", margin: "auto" }}>
+          <div class="form-row">
+            <div className="col">
+              <label for="clientSelect">Invoice to</label>
+              <select className="form-control" id="clientSelect">
+                {this.state.clientNames.map(client => (
+                  <option key={client}>{client}</option>
+                ))}
+              </select>
+            </div>
+            <div className="col">
+              <label for="date">Date</label>
+              <br />
+              <DatePicker
+                id="date"
+                className="form-control"
+                selected={this.state.date}
+                onChange={this.handleDateChange}
+              />
+            </div>
           </div>
-          <div class="form-group">
-            <label for="date">Date</label>
-            <br />
-            <DatePicker
-              id="date"
-              className="form-control"
-              selected={this.state.date}
-              onChange={this.handleDateChange}
-            />
-          </div>
-          <div class="form-group">
+          <div class="form-group" style={{ marginTop: "0.5rem" }}>
             <label for="itemSelect">Select Item</label>
             <select
               className="form-control"
@@ -49,28 +51,30 @@ class Invoice extends Component {
               ))}
             </select>
           </div>
-          <div class="form-group">
-            <label for="priceInput">Price</label>
-            <input
-              className="form-control"
-              type="number"
-              name="price"
-              placeholder="price"
-              id="priceInput"
-            />
+          <div class="form-row">
+            <div className="col">
+              <label for="priceInput">Price</label>
+              <input
+                className="form-control"
+                type="number"
+                name="price"
+                placeholder="price"
+                id="priceInput"
+              />
+            </div>
+            <div className="col">
+              <label for="quantityInput">Quantity</label>
+              <input
+                className="form-control"
+                type="number"
+                name="quantity"
+                placeholder="quantity"
+                id="quantityInput"
+              />
+            </div>
           </div>
-          <div class="form-group">
-            <label for="quantityInput">Quantity</label>
-            <input
-              className="form-control"
-              type="number"
-              name="quantity"
-              placeholder="quantity"
-              id="quantityInput"
-            />
-          </div>
-
           <button
+            style={{ marginTop: "1rem", width: "200px", textAlign: "center" }}
             className="btn btn-primary"
             onClick={event => {
               event.preventDefault();
@@ -81,21 +85,22 @@ class Invoice extends Component {
           </button>
         </form>
         <React.Fragment>
-          <div className="m-2">
+          <button
+            style={{ marginTop: "1.5rem", width: "200px" }}
+            onClick={this.handleSaveInvoiceClick}
+            className={
+              this.state.items.length === 0 || this.state.date === undefined
+                ? "btn btn-secondary"
+                : "btn btn-dark"
+            }
+          >
+            Save Invoice
+            </button>
+          <div className="m-12" style={{ marginTop: "0.5rem" }}>
             <ItemTable
               onItemDelete={this.handleItemDelete}
               items={this.state.items}
             />
-            <button
-              onClick={this.handleSaveInvoiceClick}
-              className={
-                this.state.items.length === 0 || this.state.date === undefined
-                  ? "btn btn-danger"
-                  : "btn btn-primary"
-              }
-            >
-              Save Invoice
-            </button>
           </div>
         </React.Fragment>
       </div>

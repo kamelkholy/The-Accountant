@@ -70,10 +70,10 @@ class ClientList extends React.Component {
       );
     });
     return (
-      <div>
+      <div className="container">
         <button
-          style={{ marginBottom: 10, marginLeft: 10 }}
-          class="btn btn-light"
+          style={{ marginBottom: 10 }}
+          class="btn btn-primary"
         >
           Add New
         </button>
