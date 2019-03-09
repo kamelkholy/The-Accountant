@@ -60,9 +60,8 @@ class InvoiceViewer extends Component {
   render() {
     return (
       <div className="container">
-
-        <div class="row" style={{ width: "100%", marginBottom: "10px" }}>
-          <div class="col-sm-4">
+        <div className="row" style={{ width: "100%", marginBottom: "10px" }}>
+          <div className="col-sm-4">
             <button
               onClick={this.handlePreviousClick}
               className="page-link float-right"
@@ -71,7 +70,7 @@ class InvoiceViewer extends Component {
               Previous
             </button>
           </div>
-          <div class="col-sm-4">
+          <div className="col-sm-4">
             <input
               className="form-control"
               defaultValue={this.state.invoiceNumber}
@@ -80,7 +79,7 @@ class InvoiceViewer extends Component {
               id="invoiceNumberInput"
             />
           </div>
-          <div class="col-sm-4">
+          <div className="col-sm-4">
             <button
               onClick={this.handleNextClick}
               className="page-link"
@@ -95,7 +94,7 @@ class InvoiceViewer extends Component {
           <div>
             <div
               className="row"
-              style={{ width: "50%", textAlign: "center", margin: "auto"}}
+              style={{ width: "50%", textAlign: "center", margin: "auto" }}
             >
               <div className="col-sm-6">
                 <strong>Date:</strong>{" "}
@@ -117,8 +116,8 @@ class InvoiceViewer extends Component {
             </div>
 
             <Link
-              style={{ marginBottom: "0.5rem"}}
-              class="btn btn-primary"
+              style={{ marginBottom: "0.5rem" }}
+              className="btn btn-primary"
               to="invoices/add"
             >
               Add New

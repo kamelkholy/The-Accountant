@@ -33,7 +33,9 @@ class Table extends Component {
       newHeaders[index].sort =
         newHeaders[index].sort === 0
           ? 1
-          : newHeaders[index].sort === 1 ? -1 : 0;
+          : newHeaders[index].sort === 1
+          ? -1
+          : 0;
       console.log(newHeaders[index].sort);
       this.setState({ headers: newHeaders });
     }
@@ -56,10 +58,10 @@ class Table extends Component {
         <tr>
           {row}
           <td>
-            <button class="btn btn-outline-dark btn-sm">Edit</button>
+            <button className="btn btn-outline-dark btn-sm">Edit</button>
             <button
               style={{ marginLeft: 10 }}
-              class="btn btn-outline-dark btn-sm"
+              className="btn btn-outline-dark btn-sm"
             >
               Delete
             </button>
@@ -69,13 +71,10 @@ class Table extends Component {
     });
     return (
       <div className="container">
-        <button
-          style={{ marginBottom: 10 }}
-          class="btn btn-primary"
-        >
+        <button style={{ marginBottom: 10 }} className="btn btn-primary">
           Add New
         </button>
-        <table class="table table-hover">
+        <table className="table table-hover">
           <tbody>
             <tr>{headerElements}</tr>
           </tbody>
@@ -83,30 +82,30 @@ class Table extends Component {
         </table>
         <ul
           style={{ margin: "20px" }}
-          class="pagination justify-content-center"
+          className="pagination justify-content-center"
         >
-          <li class="page-item">
-            <a class="page-link" href="#">
+          <li className="page-item">
+            <a className="page-link" href="#">
               Previous
             </a>
           </li>
-          <li class="page-item">
-            <a class="page-link" href="#">
+          <li className="page-item">
+            <a className="page-link" href="#">
               1
             </a>
           </li>
-          <li class="page-item">
-            <a class="page-link" href="#">
+          <li className="page-item">
+            <a className="page-link" href="#">
               2
             </a>
           </li>
-          <li class="page-item">
-            <a class="page-link" href="#">
+          <li className="page-item">
+            <a className="page-link" href="#">
               3
             </a>
           </li>
-          <li class="page-item">
-            <a class="page-link" href="#">
+          <li className="page-item">
+            <a className="page-link" href="#">
               Next
             </a>
           </li>
