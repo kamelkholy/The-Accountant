@@ -9,18 +9,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Temp />
+        <Router />
       </div>
     );
   }
 }
-
-const Temp = () => {
-  return (
-    <FirebaseContext.Consumer>
-      <Router />
-    </FirebaseContext.Consumer>
-  );
-};
-
 export default App;
