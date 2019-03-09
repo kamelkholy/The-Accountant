@@ -1,11 +1,8 @@
-
 import React, { Component } from "react";
-
 import { Button } from "react-bootstrap";
-
 import { Router, Route, Switch, Redirect, Link } from "react-router-dom";
 import createHistory from "history/createBrowserHistory";
-
+import database from './firebase/firebase.js'
 
 
 
@@ -14,12 +11,12 @@ class ClientForm extends React.Component {
       super(props);
       this.state = {
         formControl: {
-          clientName: this.props.clientName ? this.props.clientName : "",
-          id: this.props.id ? this.props.id : ""
+         // id: this.props.id ? this.props.id : "",
+          clientName: this.props.clientName ? this.props.clientName : ""
         }
       };
       this.handleNameChange = this.handleNameChange.bind(this);
-      this.handleIdChange = this.handleIdChange.bind(this);
+    //  this.handleIdChange = this.handleIdChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
     }
   
@@ -28,16 +25,17 @@ class ClientForm extends React.Component {
       formControl.clientName = event.target.value;
       this.setState({ formControl: formControl });
     }
-    handleIdChange(event) {
-      const formControl = this.state.formControl;
-      formControl.id = event.target.value;
-      this.setState({ formControl: formControl });
-    }
+    // handleIdChange(event) {
+    //   const formControl = this.state.formControl;
+    //   formControl.id = event.target.value;
+    //   this.setState({ formControl: formControl });
+    // }
   
     handleSubmit(event) {
       event.preventDefault();
      // clientsDemo.push(this.state.formControl);
-      this.props.history.push("/");
+     database.ref('data').push({clientName:this.state.formControl.clientName});
+      this.props.history.push("/clients");
     }
   
     render() {
@@ -54,7 +52,7 @@ class ClientForm extends React.Component {
               />
             </div>
   
-            <div className="form-group">
+            {/* <div className="form-group">
               <label>Client id:</label>
               <input
                 className="form-control form-control-lg"
@@ -62,7 +60,7 @@ class ClientForm extends React.Component {
                 value={this.state.formControl.id}
                 onChange={this.handleIdChange}
               />
-            </div>
+            </div> */}
             <Button variant="primary" type="submit">
               Submit
             </Button>
