@@ -2,13 +2,11 @@ import React, { Component } from "react";
 
 import { Router, Route, Switch, Redirect, Link } from "react-router-dom";
 import createHistory from "history/createBrowserHistory";
-import { browserHistory } from 'react-router';
-import { withRouter } from 'react-router-dom';
-import database from './firebase/firebase.js'
-
+import { browserHistory } from "react-router";
+import { withRouter } from "react-router-dom";
+import firebase from "firebase";
 
 const history = createHistory();
-
 
 class ClientList extends React.Component {
   constructor(props) {
@@ -22,25 +20,28 @@ class ClientList extends React.Component {
       data: [],
       temp: false
     };
-
-    database.ref('data').once('value').then((snapshot) => {
-      const data = [];
-      let i = 0;
-      snapshot.forEach((snapshotChild) => {
-        data.push({
-          id: i,
-          ...snapshotChild.val()
-        })
-        i++;
-      })
-      this.setState({ data: data })
-      console.log(data)
-    })
+    const database = firebase.database();
+    database
+      .ref("data")
+      .once("value")
+      .then(snapshot => {
+        const data = [];
+        let i = 0;
+        snapshot.forEach(snapshotChild => {
+          data.push({
+            id: i,
+            ...snapshotChild.val()
+          });
+          i++;
+        });
+        this.setState({ data: data });
+        console.log(data);
+      });
   }
-
-
-
-
+  componentDidMount() {
+    const database = firebase.database().ref("invoices");
+    this.setState({ database });
+  }
   renderSort(sort) {
     switch (sort) {
       case 0:
@@ -68,7 +69,7 @@ class ClientList extends React.Component {
   }
 
   AddHandler() {
-    this.props.history.push('/clients/add');
+    this.props.history.push("/clients/add");
   }
 
   render() {
@@ -80,7 +81,7 @@ class ClientList extends React.Component {
         {header.name} {this.renderSort(header.sort)}
       </td>
     ));
-    const dataElements = this.state.data.map((record) => {
+    const dataElements = this.state.data.map(record => {
       let row = [];
       for (let key in record) {
         console.log(record[key]);
@@ -103,15 +104,7 @@ class ClientList extends React.Component {
     });
     return (
       <div className="container">
-<<<<<<< HEAD
-        <button
-          style={{ marginBottom: 10 }}
-          class="btn btn-primary"
-          onClick={this.AddHandler.bind(this)}
-        >
-=======
         <button style={{ marginBottom: 10 }} className="btn btn-primary">
->>>>>>> 2ac9a1f8934f60a5f37ffc6636e7ec0e1d3cb2be
           Add New
         </button>
         <table className="table table-hover">
