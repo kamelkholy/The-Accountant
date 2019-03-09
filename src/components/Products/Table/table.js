@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 class Table extends Component {
   state = {
@@ -71,9 +72,13 @@ class Table extends Component {
     });
     return (
       <div className="container">
-        <button style={{ marginBottom: 10 }} className="btn btn-primary">
+        <Link
+          style={{ marginBottom: "0.5rem" }}
+          className="btn btn-primary"
+          to="products/add"
+        >
           Add New
-        </button>
+        </Link>
         <table className="table table-hover">
           <tbody>
             <tr>{headerElements}</tr>

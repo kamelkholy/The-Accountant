@@ -104,9 +104,13 @@ class ClientList extends React.Component {
     });
     return (
       <div className="container">
-        <button style={{ marginBottom: 10 }} className="btn btn-primary">
+        <Link
+          style={{ marginBottom: "0.5rem" }}
+          className="btn btn-primary"
+          to="clients/add"
+        >
           Add New
-        </button>
+        </Link>
         <table className="table table-hover">
           <tbody>
             <tr>{headerElements}</tr>
