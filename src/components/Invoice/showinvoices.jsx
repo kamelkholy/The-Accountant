@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import ItemTable from "./itemtable";
 import { getAllInvoices } from "./invoices";
 import DatePicker from "react-datepicker";
+import { Link } from "react-router-dom";
+
 class InvoiceViewer extends Component {
   state = {
     invoiceNumber: 0,
@@ -58,7 +60,14 @@ class InvoiceViewer extends Component {
   render() {
     return (
       <div>
-        <div class="row" style={{ width: "100%" }}>
+        <Link
+          style={{ marginBottom: 10, marginLeft: 10 }}
+          class="btn btn-light"
+          to="invoices/add"
+        >
+          Add New
+        </Link>
+        <div class="row" style={{ width: "100%", marginBottom: "10px" }}>
           <div class="col-sm-4">
             <button
               onClick={this.handlePreviousClick}

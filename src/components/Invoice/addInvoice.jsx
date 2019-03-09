@@ -72,7 +72,10 @@ class Invoice extends Component {
 
           <button
             className="btn btn-primary"
-            onClick={() => this.handleAddItemButton()}
+            onClick={event => {
+              event.preventDefault();
+              this.handleAddItemButton();
+            }}
           >
             Add
           </button>
