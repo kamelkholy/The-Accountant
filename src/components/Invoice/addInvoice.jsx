@@ -5,6 +5,8 @@ import { getAllItems, getItemByName } from "./items";
 import { getAllClients, getClientByName } from "./clients";
 import ItemTable from "./itemtable";
 import { add } from "./common/add";
+import { FirebaseContext } from "../Firebase";
+
 
 class Invoice extends Component {
   state = {
@@ -15,13 +17,16 @@ class Invoice extends Component {
     clientNames: getAllClients().map(client => client.name)
   };
 
+  componentDidMount() {}
+
   render() {
     return (
       <div className="container">
         <form style={{ width: "100%", margin: "auto" }}>
-          <div class="form-row">
+          <div className="form-row">
             <div className="col">
               <label for="clientSelect">Invoice to</label>
+
               <select className="form-control" id="clientSelect">
                 {this.state.clientNames.map(client => (
                   <option key={client}>{client}</option>
@@ -39,7 +44,7 @@ class Invoice extends Component {
               />
             </div>
           </div>
-          <div class="form-group" style={{ marginTop: "0.5rem" }}>
+          <div className="form-group" style={{ marginTop: "0.5rem" }}>
             <label for="itemSelect">Select Item</label>
             <select
               className="form-control"
@@ -51,7 +56,7 @@ class Invoice extends Component {
               ))}
             </select>
           </div>
-          <div class="form-row">
+          <div className="form-row">
             <div className="col">
               <label for="priceInput">Price</label>
               <input
@@ -95,7 +100,7 @@ class Invoice extends Component {
             }
           >
             Save Invoice
-            </button>
+          </button>
           <div className="m-12" style={{ marginTop: "0.5rem" }}>
             <ItemTable
               onItemDelete={this.handleItemDelete}
@@ -120,6 +125,12 @@ class Invoice extends Component {
     };
     if (this.state.items.length === 0 || this.state.date === undefined) return;
     //TODO: update invoices with current invoice
+
+    this.props.firebase
+      .database()
+      .ref("invoices")
+      .push(invoice);
+
     console.log(invoice);
   };
 

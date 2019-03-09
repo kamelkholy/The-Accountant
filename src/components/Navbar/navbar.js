@@ -13,28 +13,28 @@ class Navbar extends Component {
   }
   render() {
     return (
-      <nav class="navbar navbar-light navbar-expand-sm bg-light fixed-top">
-        <Link class="navbar-brand" to="/">
+      <nav className="navbar navbar-light navbar-expand-sm bg-light fixed-top">
+        <Link className="navbar-brand" to="/">
           My Manager
         </Link>
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <Link class="nav-link" to="/">
+        <ul className="navbar-nav">
+          <li className="nav-item">
+            <Link className="nav-link" to="/">
               Dashboard
             </Link>
           </li>
-          <li class="nav-item">
-            <Link class="nav-link" to="/clients">
+          <li className="nav-item">
+            <Link className="nav-link" to="/clients">
               Clients
             </Link>
           </li>
-          <li class="nav-item">
-            <Link class="nav-link" to="/products">
+          <li className="nav-item">
+            <Link className="nav-link" to="/products">
               Products
             </Link>
           </li>
-          <li class="nav-item">
-            <Link class="nav-link" to="/invoices">
+          <li className="nav-item">
+            <Link className="nav-link" to="/invoices">
               Invoices
             </Link>
           </li>
