@@ -13,6 +13,7 @@ class Firebase {
   constructor() {
     app.initializeApp(config);
   }
+  apple = app;
 }
 
 export default Firebase;
