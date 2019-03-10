@@ -1,13 +1,10 @@
 import React, { Component } from "react";
-
 import { Router, Route, Switch, Redirect, Link } from "react-router-dom";
 import createHistory from "history/createBrowserHistory";
 import { browserHistory } from "react-router";
 import { withRouter } from "react-router-dom";
 import firebase from "firebase";
-
-const history = createHistory();
-
+import _ from 'lodash'
 class ClientList extends React.Component {
   constructor(props) {
     super(props);
@@ -15,6 +12,9 @@ class ClientList extends React.Component {
       headers: [
         { name: "#", sort: 0 },
         { name: "Client Name", sort: 0 },
+        { name: "Phone Number", sort: 0 },
+        { name: "Address", sort: 0 },
+        { name: "Email Address", sort: 0 },
         { name: "Access" }
       ],
       data: [],
@@ -22,26 +22,51 @@ class ClientList extends React.Component {
     };
     const database = firebase.database();
     database
-      .ref("data")
+      .ref("Clients")
       .once("value")
       .then(snapshot => {
         const data = [];
         let i = 0;
         snapshot.forEach(snapshotChild => {
           data.push({
+            key : snapshotChild.key,
             id: i,
-            ...snapshotChild.val()
+            clienName:snapshotChild.val()['clientName'],
+            phoneNumber : snapshotChild.val()['phoneNumber'],
+            address : snapshotChild.val()['address'],
+            email : snapshotChild.val()['email']
           });
           i++;
         });
         this.setState({ data: data });
-        console.log(data);
+          
       });
+      this.DeleteHandler = this.DeleteHandler.bind(this);
+      
   }
+  
+  DeleteHandler(event){
+    const ClientToDelete = event.target.id;
+    console.log(ClientToDelete);
+    const data = this.state.data;
+    var index = _.findIndex(data,(o) => {return o.key == ClientToDelete})
+    console.log(index);
+    if(index != -1) {
+      data.splice(index,1)
+      this.setState({data :data})
+    }
+    const database = firebase.database();
+    database
+    .ref(`Clients/${ClientToDelete}`)
+    .remove()
+    
+  }
+
   componentDidMount() {
     const database = firebase.database().ref("invoices");
     this.setState({ database });
   }
+
   renderSort(sort) {
     switch (sort) {
       case 0:
@@ -63,13 +88,9 @@ class ClientList extends React.Component {
           : newHeaders[index].sort === 1
           ? -1
           : 0;
-      console.log(newHeaders[index].sort);
+      //console.log(newHeaders[index].sort);
       this.setState({ headers: newHeaders });
     }
-  }
-
-  AddHandler() {
-    this.props.history.push("/clients/add");
   }
 
   render() {
@@ -81,20 +102,28 @@ class ClientList extends React.Component {
         {header.name} {this.renderSort(header.sort)}
       </td>
     ));
-    const dataElements = this.state.data.map(record => {
+    const dataElements = this.state.data.map((record) => {
       let row = [];
+      console.log(record);
       for (let key in record) {
-        console.log(record[key]);
+        if(key === 'key')continue;
         row.push(<td>{record[key]}</td>);
       }
       return (
         <tr>
           {row}
           <td>
-            <button className="btn btn-outline-dark btn-sm">Edit</button>
+            <Link 
+              className="btn btn-outline-dark btn-sm" 
+              to= {`/clients/edit/${record['key']}`}
+            >
+               Edit
+            </Link>
             <button
               style={{ marginLeft: 10 }}
               className="btn btn-outline-dark btn-sm"
+              id = {record['key']}
+              onClick = {this.DeleteHandler}
             >
               Delete
             </button>

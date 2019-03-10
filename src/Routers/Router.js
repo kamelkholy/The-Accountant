@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-
 import { Router, Route, Switch, Redirect, Link } from "react-router-dom";
 import createHistory from "history/createBrowserHistory";
 import Clients from "../components/Clients/Table";
@@ -11,6 +10,9 @@ import Invoices from "../components/Invoice/showinvoices";
 import AddInvoice from "../components/Invoice/addInvoice";
 import Dashboard from "../components/Dashboard";
 import { withRouter } from "react-router-dom";
+
+
+
 export const history = createHistory();
 const AppRoute = () => (
   <Router history={history}>
@@ -29,7 +31,12 @@ const AppRoute = () => (
           />
           <Route
             path="/clients/add"
-            component={() => <ClientsForm history={history} />}
+            component={(props) => <ClientsForm {...props} history={history} />}
+            exact={true}
+          />
+          <Route
+            path={`/clients/edit/:id`}
+            component={(props) => <ClientsForm {...props} history={history}/>}
             exact={true}
           />
           <Route path="/invoices" component={Invoices} exact={true} />
