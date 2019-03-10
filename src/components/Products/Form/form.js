@@ -8,7 +8,6 @@ class Form extends Component {
         <h2>{this.props.title}</h2>
         <form style={{ maxWidth: 300 + "px" }}>
           <div className="form-group">
-            <label for="name">Product Name</label>
             <input
               type="text"
               className="form-control"
@@ -18,7 +17,6 @@ class Form extends Component {
             />
           </div>
           <div className="form-group">
-            <label for="purchasePrice">Purchase Price</label>
             <input
               className="form-control"
               id="purchasePrice"
@@ -27,7 +25,6 @@ class Form extends Component {
             />
           </div>
           <div className="form-group">
-            <label for="sellingPrice">Selling Price</label>
             <input
               className="form-control"
               id="sellingPrice"
@@ -36,7 +33,6 @@ class Form extends Component {
             />
           </div>
           <div className="form-group">
-            <label for="quantity">Quantity</label>
             <input
               className="form-control"
               id="quantity"
@@ -46,7 +42,7 @@ class Form extends Component {
           </div>
 
           <button type="submit" className="btn btn-primary">
-            Submit
+            Add Product
           </button>
         </form>
       </div>

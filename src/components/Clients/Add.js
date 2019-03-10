@@ -42,12 +42,12 @@ class ClientForm extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="container">
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
             <label>Client Name:</label>
             <input
-              className="form-control form-control-lg"
+              className="form-control"
               type="text"
               value={this.state.formControl.clientName}
               onChange={this.handleNameChange}
@@ -64,7 +64,7 @@ class ClientForm extends React.Component {
               />
             </div> */}
           <Button variant="primary" type="submit">
-            Submit
+            Add Client
           </Button>
         </form>
       </div>
