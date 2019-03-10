@@ -2,14 +2,14 @@ import React, { Component } from "react";
 import Chart from "chart.js/dist/Chart";
 
 export default class Bar extends Component {
-    render() {
+    componentDidMount() {
         var ctx = document.getElementById("bar").getContext('2d');
         var bar = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
                 datasets: [{
-                    label: '# of Votes',
+                    label: '# of Customers',
                     data: [12, 19, 3, 5, 2, 3],
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
@@ -40,7 +40,9 @@ export default class Bar extends Component {
                 }
             }
         });
-        
+    }
+
+    render() {
         return (
             <canvas id="bar" width="400" height="400"></canvas>
         )

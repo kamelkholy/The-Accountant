@@ -14,10 +14,11 @@ import { withRouter } from "react-router-dom";
 export const history = createHistory();
 const AppRoute = () => (
   <Router history={history}>
-    <div>
+    <div className="container">
       <Navbar />
       <div style={{ "margin-top": 80 + "px" }}>
         <Switch>
+          <Route path="/" component={Dashboard} exact={true} />
           <Route path="/dashboard" component={Dashboard} exact={true} />
           <Route path="/products" component={Products} exact={true} />
           <Route path="/products/add" component={ProductsAdd} exact={true} />

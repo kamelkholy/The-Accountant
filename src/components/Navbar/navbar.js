@@ -15,11 +15,11 @@ class Navbar extends Component {
     return (
       <nav className="navbar navbar-light navbar-expand-sm bg-light fixed-top">
         <Link className="navbar-brand" to="/">
-          My Manager
+          Project
         </Link>
         <ul className="navbar-nav">
           <li className="nav-item">
-            <Link className="nav-link" to="/">
+            <Link className="nav-link" to="/dashboard">
               Dashboard
             </Link>
           </li>

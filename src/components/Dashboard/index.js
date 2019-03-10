@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Bar from "./Bar";
+import Pie from "./Pie";
 
 export default class Dashboard extends Component {
   render() {
@@ -10,7 +11,7 @@ export default class Dashboard extends Component {
             <Bar />
           </div>
           <div className="col-6">
-            <Bar />
+            <Pie />
           </div>
         </div>
       </div>
