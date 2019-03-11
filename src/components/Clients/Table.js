@@ -15,6 +15,7 @@ class ClientList extends React.Component {
         { name: "Phone Number", sort: 0 },
         { name: "Address", sort: 0 },
         { name: "Email Address", sort: 0 },
+        { name: "Profit", sort: 0 },
         { name: "Access" }
       ],
       data: [],
@@ -34,7 +35,8 @@ class ClientList extends React.Component {
             clienName:snapshotChild.val()['clientName'],
             phoneNumber : snapshotChild.val()['phoneNumber'],
             address : snapshotChild.val()['address'],
-            email : snapshotChild.val()['email']
+            email : snapshotChild.val()['email'],
+            profit: snapshotChild.val()['profit']
           });
           i++;
         });
