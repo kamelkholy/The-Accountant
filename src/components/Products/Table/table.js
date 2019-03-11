@@ -1,20 +1,27 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import firebase from "firebase";
 
 class Table extends Component {
+  componentDidMount() {
+    firebase
+      .database()
+      .ref("products")
+      .on("value", snapshot => {
+        let data = snapshot.val();
+        data = data === null ? {} : data;
+        this.setState({ data });
+      });
+  }
   state = {
     headers: [
       { name: "Product Name", sort: 0 },
       { name: "Purchase Price", sort: 0 },
       { name: "Selling Price", sort: 0 },
-      { name: "Quantity", sort: 0 },
+      { name: "Stock", sort: 0 },
       { name: "Access" }
     ],
-    data: [
-      { productName: "Bag", purchasePrice: 20, sellingPrice: 25, quantity: 5 },
-      { productName: "Bag", purchasePrice: 20, sellingPrice: 25, quantity: 5 },
-      { productName: "Bag", purchasePrice: 20, sellingPrice: 25, quantity: 5 }
-    ]
+    data: {}
   };
   renderSort(sort) {
     switch (sort) {
@@ -41,6 +48,12 @@ class Table extends Component {
       this.setState({ headers: newHeaders });
     }
   }
+  deleteProduct(id) {
+    firebase
+      .database()
+      .ref(`products/${id}`)
+      .remove();
+  }
   render() {
     const headerElements = this.state.headers.map((header, index) => (
       <td
@@ -50,19 +63,29 @@ class Table extends Component {
         {header.name} {this.renderSort(header.sort)}
       </td>
     ));
-    const dataElements = this.state.data.map(record => {
+    console.log(this.state.data);
+    const dataElements = Object.keys(this.state.data).map(id => {
       let row = [];
-      for (let key in record) {
-        row.push(<td>{record[key]}</td>);
+      for (let key in this.state.data[id]) {
+        row.push(<td>{this.state.data[id][key]}</td>);
       }
       return (
         <tr>
           {row}
           <td>
-            <button className="btn btn-outline-dark btn-sm">Edit</button>
+            <Link
+              to={{
+                pathname: "/products/edit",
+                state: { id: id }
+              }}
+              className="btn btn-outline-dark btn-sm"
+            >
+              Edit
+            </Link>
             <button
               style={{ marginLeft: 10 }}
               className="btn btn-outline-dark btn-sm"
+              onClick={this.deleteProduct.bind(this, id)}
             >
               Delete
             </button>
@@ -85,7 +108,7 @@ class Table extends Component {
           </tbody>
           <tbody>{dataElements}</tbody>
         </table>
-        <ul
+        {/* <ul
           style={{ margin: "20px" }}
           className="pagination justify-content-center"
         >
@@ -114,7 +137,7 @@ class Table extends Component {
               Next
             </a>
           </li>
-        </ul>
+        </ul> */}
       </div>
     );
   }

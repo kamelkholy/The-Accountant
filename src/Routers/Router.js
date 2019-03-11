@@ -5,6 +5,7 @@ import Clients from "../components/Clients/Table";
 import ClientsForm from "../components/Clients/Add";
 import Products from "../components/Products/Table/table";
 import ProductsAdd from "../components/Products/Add/add";
+import ProductsEdit from "../components/Products/Edit/edit";
 import Navbar from "../components/Navbar/navbar";
 import Invoices from "../components/Invoice/showinvoices";
 import AddInvoice from "../components/Invoice/addInvoice";
@@ -22,8 +23,21 @@ const AppRoute = () => (
         <Switch>
           <Route path="/" component={Dashboard} exact={true} />
           <Route path="/dashboard" component={Dashboard} exact={true} />
-          <Route path="/products" component={Products} exact={true} />
-          <Route path="/products/add" component={ProductsAdd} exact={true} />
+          <Route
+            path="/products"
+            component={() => <Products history={history} />}
+            exact={true}
+          />
+          <Route
+            path="/products/add"
+            component={props => <ProductsAdd {...props} history={history} />}
+            exact={true}
+          />
+          <Route
+            path="/products/edit"
+            component={props => <ProductsEdit {...props} history={history} />}
+            exact={true}
+          />
           <Route
             path="/clients"
             component={() => <Clients history={history} />}

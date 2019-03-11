@@ -146,7 +146,7 @@ class ClientList extends React.Component {
           </tbody>
           <tbody>{dataElements}</tbody>
         </table>
-        <ul
+        {/* <ul
           style={{ margin: "20px" }}
           className="pagination justify-content-center"
         >
@@ -175,7 +175,7 @@ class ClientList extends React.Component {
               Next
             </a>
           </li>
-        </ul>
+        </ul> */}
       </div>
     );
   }
