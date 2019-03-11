@@ -1,7 +1,12 @@
 import React, { Component } from "react";
 
 class Form extends Component {
-  state = {};
+  state = {
+    data: {}
+  };
+  componentDidMount() {
+    this.setState({ data: this.props.data });
+  }
   render() {
     return (
       <div className="container">
@@ -14,6 +19,8 @@ class Form extends Component {
               id="name"
               placeholder="Product Name"
               name="name"
+              value={this.state.data.name}
+              onChange={this.handleChange.bind(this)}
             />
           </div>
           <div className="form-group">
@@ -22,6 +29,8 @@ class Form extends Component {
               id="purchasePrice"
               placeholder="Purchase Price"
               name="purchasePrice"
+              value={this.state.data.purchasePrice}
+              onChange={this.handleChange.bind(this)}
             />
           </div>
           <div className="form-group">
@@ -30,23 +39,42 @@ class Form extends Component {
               id="sellingPrice"
               placeholder="Selling Price"
               name="sellingPrice"
+              value={this.state.data.sellingPrice}
+              onChange={this.handleChange.bind(this)}
             />
           </div>
           <div className="form-group">
             <input
               className="form-control"
-              id="quantity"
-              placeholder="Quantity"
-              name="quantity"
+              id="stock"
+              placeholder="Stock"
+              name="stock"
+              value={this.state.data.stock}
+              onChange={this.handleChange.bind(this)}
             />
           </div>
 
-          <button type="submit" className="btn btn-primary">
-            Add Product
+          <button
+            onClick={e => {
+              e.preventDefault();
+              return this.handleSubmit();
+            }}
+            type="submit"
+            className="btn btn-primary"
+          >
+            Submit
           </button>
         </form>
       </div>
     );
+  }
+  handleSubmit() {
+    this.props.operation(this.state.data);
+  }
+  handleChange(e) {
+    let data = this.state.data;
+    data[e.target.name] = e.target.value;
+    this.setState({ data });
   }
 }
 
