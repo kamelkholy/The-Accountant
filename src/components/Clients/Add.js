@@ -16,7 +16,8 @@ class ClientForm extends React.Component {
         clientName: this.props.clientName ? this.props.clientName : "",
         phoneNumber: this.props.phoneNumber?this.props.phoneNumber : "",
         address : this.props.address?this.props.address:"",
-        email : this.props.email?this.props.email : ""
+        email : this.props.email?this.props.email : "",
+        profit : this.props.profit?this.props.profit : ""
       }
     };
     if(props.match.params.id){
@@ -40,6 +41,7 @@ class ClientForm extends React.Component {
     this.handleAddressChange = this.handleAddressChange.bind(this);
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.EditHandler = this.EditHandler.bind(this);
+    this.handleProfitChange = this.handleProfitChange.bind(this)
   }
 
   handleNameChange(event) {
@@ -62,6 +64,11 @@ class ClientForm extends React.Component {
     formControl.email = event.target.value;
     this.setState({ formControl: formControl });
   }
+  handleProfitChange(event){
+    const formControl = this.state.formControl;
+    formControl.profit = event.target.value;
+    this.setState({ formControl: formControl });
+  }
  
 
   handleSubmit(event) {
@@ -75,7 +82,8 @@ class ClientForm extends React.Component {
         clientName: this.state.formControl.clientName,
         phoneNumber:this.state.formControl.phoneNumber,
         address : this.state.formControl.address,
-        email : this.state.formControl.email
+        email : this.state.formControl.email,
+        profit : this.state.formControl.profit
        });
     this.props.history.push("/clients");
   }
@@ -90,7 +98,8 @@ class ClientForm extends React.Component {
       clientName: this.state.formControl.clientName,
       phoneNumber:this.state.formControl.phoneNumber,
       address : this.state.formControl.address,
-      email : this.state.formControl.email
+      email : this.state.formControl.email,
+      profit : this.state.formControl.profit
     })
     this.props.history.push("/clients");
   }
@@ -138,6 +147,16 @@ class ClientForm extends React.Component {
               type="email"
               value={this.state.formControl.email}
               onChange={this.handleEmailChange}
+            />
+          </div>
+
+          <div className="form-group">
+            <label>Profit:</label>
+            <input
+              className="form-control"
+              type="text"
+              value={this.state.formControl.profit}
+              onChange={this.handleProfitChange}
             />
           </div>
           {/* <div className="form-group">
