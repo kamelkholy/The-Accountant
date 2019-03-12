@@ -19,7 +19,7 @@ const AppRoute = () => (
   <Router history={history}>
     <div className="container">
       <Navbar />
-      <div style={{ "margin-top": 80 + "px" }}>
+      <div style={{ marginTop: 80 + "px" }}>
         <Switch>
           <Route path="/" component={Dashboard} exact={true} />
           <Route path="/dashboard" component={Dashboard} exact={true} />
@@ -53,8 +53,16 @@ const AppRoute = () => (
             component={(props) => <ClientsForm {...props} history={history}/>}
             exact={true}
           />
-          <Route path="/invoices" component={Invoices} exact={true} />
-          <Route path="/invoices/add" component={AddInvoice} exact={true} />
+          <Route
+            path="/invoices"
+            component={() => <Invoices history={history} />}
+            exact={true}
+          />
+          <Route
+            path="/invoices/add"
+            component={() => <AddInvoice history={history} />}
+            exact={true}
+          />
         </Switch>
       </div>
     </div>
