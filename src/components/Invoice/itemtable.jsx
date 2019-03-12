@@ -1,7 +1,7 @@
 import React from "react";
 import { add } from "./common/add";
 
-const ItemTable = props => {
+const ProductTable = props => {
   return (
     <table className="table">
       <thead>
@@ -16,17 +16,17 @@ const ItemTable = props => {
       </thead>
 
       <tbody>
-        {props.items.map(item => (
-          <tr key={props.items.indexOf(item)}>
-            <td>{props.items.indexOf(item) + 1}</td>
-            <td>{item.item.name}</td>
-            <td>{item.price}</td>
-            <td>{item.quantity}</td>
-            <td>{item.subtotal}</td>
+        {props.products.map(product => (
+          <tr key={props.products.indexOf(product)}>
+            <td>{props.products.indexOf(product) + 1}</td>
+            <td>{product.product.product.name}</td>
+            <td>{product.price}</td>
+            <td>{product.quantity}</td>
+            <td>{product.subtotal}</td>
             <td>
-              {props.onItemDelete ? (
+              {props.onProductDelete ? (
                 <button
-                  onClick={() => props.onItemDelete(item)}
+                  onClick={() => props.onProductDelete(product)}
                   className="btn btn-danger btn-sm"
                 >
                   Delete
@@ -42,7 +42,9 @@ const ItemTable = props => {
           <td />
           <td />
           <td />
-          <td>{props.items.map(item => item.subtotal).reduce(add, 0)}</td>
+          <td>
+            {props.products.map(product => product.subtotal).reduce(add, 0)}
+          </td>
           <td />
         </tr>
       </tbody>
@@ -50,4 +52,4 @@ const ItemTable = props => {
   );
 };
 
-export default ItemTable;
+export default ProductTable;
