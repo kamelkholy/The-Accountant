@@ -199,7 +199,6 @@ class Invoice extends Component {
     this.state.database.ref("invoices").push(invoice);
 
     this.props.history.push("/invoices");
-    window.location.reload();
   };
 
   handleProductDelete = product => {

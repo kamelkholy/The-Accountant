@@ -21,7 +21,7 @@ class InvoiceViewer extends Component {
   };
   //TODO: sort by date
 
-  componentDidMount() {
+  componentWillMount() {
     const database = firebase.database();
     const invoicesRef = database.ref("invoices");
     const clientsRef = database.ref("Clients");
@@ -49,6 +49,8 @@ class InvoiceViewer extends Component {
       console.log(allInvoices);
       if (allInvoices) {
         const { invoiceNumber } = this.state;
+        console.log("allInvoices, before calling structuring");
+        console.log(allInvoices);
         this.setState({ allInvoices });
         this.restructureAllInvoices();
         const currentInvoice = Object.values(allInvoices)[0];
@@ -58,9 +60,13 @@ class InvoiceViewer extends Component {
   }
 
   restructureAllInvoices() {
+    console.log("Restructuring...");
+
     const { invoiceNumber, clients, allProducts } = this.state;
     let { allInvoices } = this.state;
-
+    if (Object.keys(allInvoices).length === 0) window.location.reload();
+    console.log("allInvoices, before structuring");
+    console.log(allInvoices);
     const values = Object.values(allInvoices).map(currentInvoice => {
       currentInvoice.client = getClientByKey(clients, currentInvoice.clientKey);
       currentInvoice.products = currentInvoice.products.map(product => {
@@ -80,6 +86,8 @@ class InvoiceViewer extends Component {
       {}
     );
     this.setState({ allInvoices });
+    console.log("allInvoices, after restructuring");
+    console.log(allInvoices);
   }
 
   handlePreviousClick = () => {
@@ -192,6 +200,7 @@ class InvoiceViewer extends Component {
                 {new Date(this.state.currentInvoice.date).toDateString()}
               </div>
               <div className="col-sm-6">
+                {console.log(this.state.currentInvoice)}
                 <strong>Client:</strong>{" "}
                 {this.state.currentInvoice.client.client.clientName}
               </div>
